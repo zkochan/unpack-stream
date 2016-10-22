@@ -34,11 +34,11 @@ Unpacks a remote stream fetched via HTTP.
 
 **Arguments:**
 
-* `stream` - *Stream*
-* `destination` - *string* - the directory to which the stream will be unpacked
-* `[opts.shasum]` - *string* - shasum to verify tarball
-* `[opts.onStart]` - *Function* - called on download start
-* `[opts.onProgress]` - *(downloaded, size) => void* - tracks the download progress
+- `stream` - _Stream_
+- `destination` - _string_ - the directory to which the stream will be unpacked
+- `[opts.shasum]` - _string_ - shasum to verify tarball
+- `[opts.onStart]` - _Function_ - called on download start
+- `[opts.onProgress]` - _(downloaded, size) => void_ - tracks the download progress
 
 ### `local(stream, destination): Promise<void>`
 
