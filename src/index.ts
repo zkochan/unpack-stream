@@ -1,5 +1,5 @@
 import crypto = require('crypto')
-import gunzip = require('gunzip-maybe')
+import decompress = require('decompress-maybe')
 import tar = require('tar-fs')
 import {IncomingMessage} from 'http'
 
@@ -58,7 +58,7 @@ export function remote (stream: IncomingMessage, dest: string, opts: UnpackRemot
 export function local (stream: NodeJS.ReadableStream, dest: string) {
   return new Promise((resolve, reject) => {
     stream
-      .pipe(gunzip()).on('error', reject)
+      .pipe(decompress()).on('error', reject)
       .pipe(tar.extract(dest, { strip: 1 })).on('error', reject)
       .on('finish', resolve)
   })
