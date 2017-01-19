@@ -1,4 +1,4 @@
-declare module 'gunzip-maybe' {
+declare module 'decompress-maybe' {
   const anything: any;
   export = anything;
 }
