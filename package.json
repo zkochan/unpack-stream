@@ -36,6 +36,8 @@
   "dependencies": {
     "@types/node": "^7.0.0",
     "decompress-maybe": "^1.0.0",
+    "setvalue": "^1.0.1",
+    "ssri": "^4.1.6",
     "tar-fs": "^1.14.0"
   },
   "devDependencies": {

@@ -2,6 +2,8 @@ import crypto = require('crypto')
 import decompress = require('decompress-maybe')
 import tar = require('tar-fs')
 import {IncomingMessage} from 'http'
+import {set} from 'setvalue'
+import ssri = require('ssri')
 
 export type UnpackProgress = (downloaded: number, totalSize: number) => void
 
@@ -43,23 +45,47 @@ export function remote (stream: IncomingMessage, dest: string, opts: UnpackRemot
       }
     }
 
-    function finish () {
+    function finish (index: {}) {
       const digest = actualShasum.digest('hex')
       if (opts.shasum && digest !== opts.shasum) {
         reject(new Error(`Incorrect shasum (expected ${opts.shasum}, got ${digest})`))
         return
       }
 
-      resolve()
+      resolve(index)
     }
   })
 }
 
 export function local (stream: NodeJS.ReadableStream, dest: string) {
+  const index = {}
+  const integrityPromises: Promise<{}>[] = []
   return new Promise((resolve, reject) => {
     stream
       .pipe(decompress()).on('error', reject)
-      .pipe(tar.extract(dest, { strip: 1 })).on('error', reject)
-      .on('finish', resolve)
+      .pipe(
+        tar.extract(dest, {
+          strip: 1,
+          mapStream (fileStream: NodeJS.ReadableStream, header: {name: string}) {
+            integrityPromises.push(
+              ssri.fromStream(fileStream)
+                .then((sri: {}) => {
+                  set(index, header.name.split('/'), {
+                    integrity: sri.toString(),
+                    type: header['type'],
+                    size: header['size'],
+                    mtime: header['mtime'],
+                  })
+                })
+            )
+            return fileStream
+          },
+        })
+      ).on('error', reject)
+      .on('finish', () => {
+        Promise.all(integrityPromises)
+          .then(() => resolve(index))
+          .catch(reject)
+      })
   })
 }

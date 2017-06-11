@@ -1,6 +1,8 @@
 dependencies:
   '@types/node': 7.0.29
   decompress-maybe: 1.0.0
+  setvalue: 1.0.1
+  ssri: 4.1.6
   tar-fs: 1.15.3
 devDependencies:
   '@types/tape': 4.2.30
@@ -695,13 +697,15 @@ packages:
     resolution:
       integrity: sha1-0mPKVGls2KMGtcplUekt5XkY++c=
   /safe-buffer/5.1.0:
-    dev: true
     resolution:
       integrity: sha1-/kyEYDl/nqqqWOc75GJzQIpF4iM=
   /semver/5.3.0:
     dev: true
     resolution:
       integrity: sha1-myzl094C0XxgEq0yaqa00M9U+U8=
+  /setvalue/1.0.1:
+    resolution:
+      integrity: sha1-3hnCbf/r8AZnRHRl99UWWG2zDnY=
   /source-map-support/0.4.15:
     dependencies:
       source-map: 0.5.6
@@ -730,6 +734,11 @@ packages:
     dev: true
     resolution:
       integrity: sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=
+  /ssri/4.1.6:
+    dependencies:
+      safe-buffer: 5.1.0
+    resolution:
+      integrity: sha1-DLSbashEV+e91GbLcww8tiPpols=
   /stream-shift/1.0.0:
     resolution:
       integrity: sha1-1cdSgl5TZ+eG944Y5EXqIjoVWVI=
@@ -914,6 +923,8 @@ specifiers:
   mos: ^2.0.0-alpha.3
   mos-plugin-readme: ^1.0.4
   rimraf: ^2.6.1
+  setvalue: ^1.0.1
+  ssri: ^4.1.6
   tape: ^4.6.3
   tar-fs: ^1.14.0
   ts-node: ^3.0.6

@@ -7,3 +7,8 @@ declare module 'tar-fs' {
   const anything: any;
   export = anything;
 }
+
+declare module 'ssri' {
+  const anything: any;
+  export = anything;
+}
