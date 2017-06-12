@@ -8,8 +8,7 @@ test('unpack local tarball', t => {
   const dest = path.join(__dirname, 'dest')
   unpackStream.local(fs.createReadStream(tarballLoc), dest)
     .then(index => {
-      t.deepEqual(Object.keys(index), ['package.json', '.npmignore', 'README.md', 'lib'])
-      t.deepEqual(Object.keys(index['lib']), ['index.js'])
+      t.deepEqual(Object.keys(index), ['package.json', '.npmignore', 'README.md', 'lib/index.js'])
       t.ok(index['package.json']['integrity'])
       t.end()
     })

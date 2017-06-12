@@ -2,7 +2,6 @@ import crypto = require('crypto')
 import decompress = require('decompress-maybe')
 import tar = require('tar-fs')
 import {IncomingMessage} from 'http'
-import {set} from 'setvalue'
 import ssri = require('ssri')
 
 export type UnpackProgress = (downloaded: number, totalSize: number) => void
@@ -57,6 +56,15 @@ export function remote (stream: IncomingMessage, dest: string, opts: UnpackRemot
   })
 }
 
+export type Index = {
+  [filename: string]: {
+    type: 'file',
+    size: number,
+    integrity: string,
+    mtime: string,
+  }
+}
+
 export function local (stream: NodeJS.ReadableStream, dest: string) {
   const index = {}
   const integrityPromises: Promise<{}>[] = []
@@ -70,12 +78,12 @@ export function local (stream: NodeJS.ReadableStream, dest: string) {
             integrityPromises.push(
               ssri.fromStream(fileStream)
                 .then((sri: {}) => {
-                  set(index, header.name.split('/'), {
+                  index[header.name] = {
                     integrity: sri.toString(),
                     type: header['type'],
                     size: header['size'],
                     mtime: header['mtime'],
-                  })
+                  }
                 })
             )
             return fileStream

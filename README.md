@@ -49,7 +49,7 @@ unpackStream.remote(stream, './tmp')
 
 ## API
 
-### `remote(stream, destination, [opts]): Promise<void>`
+### `remote(stream, destination, [opts]): Promise<Index>`
 
 Unpacks a remote stream fetched via HTTP.
 
@@ -61,7 +61,7 @@ Unpacks a remote stream fetched via HTTP.
 - `[opts.onStart]` - _Function_ - called on download start
 - `[opts.onProgress]` - _(downloaded, size) => void_ - tracks the download progress
 
-### `local(stream, destination): Promise<void>`
+### `local(stream, destination): Promise<Index>`
 
 Unpacks a stream from the local filesystem.
 

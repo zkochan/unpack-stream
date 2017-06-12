@@ -1,7 +1,6 @@
 dependencies:
   '@types/node': 7.0.29
   decompress-maybe: 1.0.0
-  setvalue: 1.0.1
   ssri: 4.1.6
   tar-fs: 1.15.3
 devDependencies:
@@ -703,9 +702,6 @@ packages:
     dev: true
     resolution:
       integrity: sha1-myzl094C0XxgEq0yaqa00M9U+U8=
-  /setvalue/1.0.1:
-    resolution:
-      integrity: sha1-3hnCbf/r8AZnRHRl99UWWG2zDnY=
   /source-map-support/0.4.15:
     dependencies:
       source-map: 0.5.6
@@ -923,7 +919,6 @@ specifiers:
   mos: ^2.0.0-alpha.3
   mos-plugin-readme: ^1.0.4
   rimraf: ^2.6.1
-  setvalue: ^1.0.1
   ssri: ^4.1.6
   tape: ^4.6.3
   tar-fs: ^1.14.0
