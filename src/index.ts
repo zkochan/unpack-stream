@@ -57,16 +57,26 @@ export function remote (stream: IncomingMessage, dest: string, opts: UnpackRemot
 }
 
 export type Index = {
-  [filename: string]: {
-    type: 'file',
-    size: number,
-    integrity: string,
-    mtime: string,
-  }
+  headers: {
+    [filename: string]: {
+      type: 'file',
+      size: number,
+      mtime: string,
+    }
+  },
+  integrityPromise: Promise<{
+    [filename: string]: {
+      type: 'file',
+      size: number,
+      integrity: string,
+      mtime: string,
+    }
+  }>
 }
 
 export function local (stream: NodeJS.ReadableStream, dest: string) {
   const index = {}
+  const headers = {}
   const integrityPromises: Promise<{}>[] = []
   return new Promise((resolve, reject) => {
     stream
@@ -75,6 +85,7 @@ export function local (stream: NodeJS.ReadableStream, dest: string) {
         tar.extract(dest, {
           strip: 1,
           mapStream (fileStream: NodeJS.ReadableStream, header: {name: string}) {
+            headers[header.name] = header
             integrityPromises.push(
               ssri.fromStream(fileStream)
                 .then((sri: {}) => {
@@ -91,9 +102,11 @@ export function local (stream: NodeJS.ReadableStream, dest: string) {
         })
       ).on('error', reject)
       .on('finish', () => {
-        Promise.all(integrityPromises)
-          .then(() => resolve(index))
-          .catch(reject)
+        resolve({
+          headers,
+          integrityPromise: Promise.all(integrityPromises)
+            .then(() => index)
+        })
       })
   })
 }
