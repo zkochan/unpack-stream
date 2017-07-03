@@ -9,7 +9,10 @@ test('unpack local tarball', t => {
   unpackStream.local(fs.createReadStream(tarballLoc), dest)
     .then(index => {
       t.deepEqual(Object.keys(index['headers']), ['package.json', '.npmignore', 'README.md', 'lib/index.js'])
-      t.ok(index['package.json']['integrity'])
+      return index['integrityPromise']
+    })
+    .then(integrity => {
+      t.ok(integrity['package.json']['integrity'])
       t.end()
     })
     .catch(t.end)
