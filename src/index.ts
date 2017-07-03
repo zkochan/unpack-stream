@@ -80,6 +80,7 @@ export function local (stream: NodeJS.ReadableStream, dest: string) {
   const integrityPromises: Promise<{}>[] = []
   return new Promise((resolve, reject) => {
     stream
+      .on('error', reject)
       .pipe(decompress()).on('error', reject)
       .pipe(
         tar.extract(dest, {
