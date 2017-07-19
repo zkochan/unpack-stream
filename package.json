@@ -47,7 +47,7 @@
     "rimraf": "^2.6.1",
     "tape": "^4.6.3",
     "ts-node": "^3.0.6",
-    "typescript": "^2.0.3"
+    "typescript": "^2.4.2"
   },
   "mos": {
     "plugins": [
