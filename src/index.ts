@@ -9,10 +9,15 @@ export type UnpackProgress = (downloaded: number, totalSize: number) => void
 export type UnpackRemoteStreamOptions = {
   onStart?: () => void,
   onProgress?: UnpackProgress,
-  shasum?: string
+  shasum?: string,
+  generateIntegrity?: boolean,
 }
 
-export function remote (stream: IncomingMessage, dest: string, opts: UnpackRemoteStreamOptions) {
+export function remote (
+  stream: IncomingMessage,
+  dest: string,
+  opts: UnpackRemoteStreamOptions
+) {
   opts = opts || {}
   return new Promise((resolve, reject) => {
     const actualShasum = crypto.createHash('sha1')
@@ -71,7 +76,15 @@ export type Index = {
   }>
 }
 
-export function local (stream: NodeJS.ReadableStream, dest: string) {
+export function local (
+  stream: NodeJS.ReadableStream,
+  dest: string,
+  opts?: {
+    generateIntegrity?: boolean,
+  }
+) {
+  opts = opts || {}
+  const generateIntegrity = opts.generateIntegrity !== false
   const index = {}
   const headers = {}
   const integrityPromises: Promise<{}>[] = []
@@ -84,27 +97,33 @@ export function local (stream: NodeJS.ReadableStream, dest: string) {
           strip: 1,
           mapStream (fileStream: NodeJS.ReadableStream, header: {name: string}) {
             headers[header.name] = header
-            integrityPromises.push(
-              ssri.fromStream(fileStream)
-                .then((sri: {}) => {
-                  index[header.name] = {
-                    integrity: sri.toString(),
-                    type: header['type'],
-                    size: header['size'],
-                    mtime: header['mtime'],
-                  }
-                })
-            )
+            if (generateIntegrity) {
+              integrityPromises.push(
+                ssri.fromStream(fileStream)
+                  .then((sri: {}) => {
+                    index[header.name] = {
+                      integrity: sri.toString(),
+                      type: header['type'],
+                      size: header['size'],
+                      mtime: header['mtime'],
+                    }
+                  })
+              )
+            }
             return fileStream
           },
         })
       ).on('error', reject)
       .on('finish', () => {
-        resolve({
-          headers,
-          integrityPromise: Promise.all(integrityPromises)
-            .then(() => index)
-        })
+        if (generateIntegrity) {
+          resolve({
+            headers,
+            integrityPromise: Promise.all(integrityPromises)
+              .then(() => index)
+          })
+          return
+        }
+        resolve({ headers })
       })
   })
 }

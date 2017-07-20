@@ -60,10 +60,15 @@ Unpacks a remote stream fetched via HTTP.
 - `[opts.shasum]` - _string_ - shasum to verify tarball
 - `[opts.onStart]` - _Function_ - called on download start
 - `[opts.onProgress]` - _(downloaded, size) => void_ - tracks the download progress
+- `[opts.generateIntegrity]` - _Boolean_ - `true` by default. If `true`, generates [Subresource Integrity](https://w3c.github.io/webappsec-subresource-integrity/) for each unpacked file
 
-### `local(stream, destination): Promise<Index>`
+### `local(stream, destination, [opts]): Promise<Index>`
 
 Unpacks a stream from the local filesystem.
+
+**Arguments:**
+
+- `[opts.generateIntegrity]` - _Boolean_ - `true` by default. If `true`, generates [Subresource Integrity](https://w3c.github.io/webappsec-subresource-integrity/) for each unpacked file
 
 ## License
 
