@@ -11,6 +11,7 @@ export type UnpackRemoteStreamOptions = {
   onProgress?: UnpackProgress,
   shasum?: string,
   generateIntegrity?: boolean,
+  ignore?: (filename: string) => Boolean,
 }
 
 export function remote (
@@ -37,11 +38,11 @@ export function remote (
       })
     }
 
-    local(
-      stream
-        .on('data', (_: Buffer) => { actualShasum.update(_) })
-        .on('error', reject), dest
-    ).then(finish).catch(reject)
+    const streamToUnpack = stream
+      .on('data', (_: Buffer) => { actualShasum.update(_) })
+      .on('error', reject)
+
+    local(streamToUnpack, dest, opts).then(finish).catch(reject)
 
     // without pausing, gunzip/tar-fs would miss the beginning of the stream
     if (stream.resume) stream.resume()
@@ -81,9 +82,11 @@ export function local (
   dest: string,
   opts?: {
     generateIntegrity?: boolean,
+    ignore?: (filename: string) => Boolean,
   }
 ) {
   opts = opts || {}
+  const ignore = opts.ignore && function (filename: string, header: {name: string}) { return opts!.ignore!(header.name) } || function () { return false }
   const generateIntegrity = opts.generateIntegrity !== false
   const index = {}
   const headers = {}
@@ -95,6 +98,7 @@ export function local (
       .pipe(
         tar.extract(dest, {
           strip: 1,
+          ignore,
           mapStream (fileStream: NodeJS.ReadableStream, header: {name: string}) {
             headers[header.name] = header
             if (generateIntegrity) {
@@ -102,10 +106,12 @@ export function local (
                 ssri.fromStream(fileStream)
                   .then((sri: {}) => {
                     index[header.name] = {
-                      integrity: sri.toString(),
                       type: header['type'],
                       size: header['size'],
                       mtime: header['mtime'],
+                    }
+                    if (sri) {
+                      index[header.name].integrity = sri.toString()
                     }
                   })
               )

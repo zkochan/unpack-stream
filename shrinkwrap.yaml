@@ -6,6 +6,7 @@ dependencies:
 devDependencies:
   '@types/tape': 4.2.31
   got: 8.0.0
+  ignorable: 1.0.1
   mos: 2.0.0-alpha.3
   mos-plugin-readme: 1.0.4
   rimraf: 2.6.2
@@ -988,6 +989,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-vjPUCsEO8ZJnAfbwii2G+/0a0+Q=
+  /ignorable/1.0.1:
+    dev: true
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha512-Fr7wf72G+INndhhOqDhMt9Z33GC+WXSmV/VKmzk9veSKS9JiY2srAWnGbg0R8a8Wgjhao914OsorLT3Y8Gn01A==
   /imurmurhash/0.1.4:
     dev: true
     engines:
@@ -2659,6 +2666,7 @@ specifiers:
   '@types/tape': ^4.2.30
   decompress-maybe: ^1.0.0
   got: ^8.0.0
+  ignorable: ^1.0.1
   mos: ^2.0.0-alpha.3
   mos-plugin-readme: ^1.0.4
   rimraf: ^2.6.1
