@@ -17,32 +17,29 @@ export function remote (stream: IncomingMessage, dest: string, opts: UnpackRemot
   return new Promise((resolve, reject) => {
     const actualShasum = crypto.createHash('sha1')
 
+    if (stream.statusCode !== 200) {
+      return reject(new Error(`Invalid response: ${stream.statusCode}`))
+    }
+
+    if (opts.onStart) opts.onStart()
+    if (opts.onProgress && stream.headers['content-length']) {
+      const onProgress = opts.onProgress
+      let downloaded = 0
+      let size = parseInt(<string>stream.headers['content-length'])
+      stream.on('data', (chunk: Buffer) => {
+        downloaded += chunk.length
+        onProgress(downloaded, size)
+      })
+    }
+
     local(
       stream
-        .on('response', start)
         .on('data', (_: Buffer) => { actualShasum.update(_) })
         .on('error', reject), dest
     ).then(finish).catch(reject)
 
     // without pausing, gunzip/tar-fs would miss the beginning of the stream
     if (stream.resume) stream.resume()
-
-    function start (res: IncomingMessage) {
-      if (res.statusCode !== 200) {
-        return reject(new Error(`Invalid response: ${res.statusCode}`))
-      }
-
-      if (opts.onStart) opts.onStart()
-      if (opts.onProgress && ('content-length' in res.headers)) {
-        const onProgress = opts.onProgress
-        let downloaded = 0
-        let size = +res.headers['content-length']
-        res.on('data', (chunk: Buffer) => {
-          downloaded += chunk.length
-          onProgress(downloaded, size)
-        })
-      }
-    }
 
     function finish (index: {}) {
       const digest = actualShasum.digest('hex')
