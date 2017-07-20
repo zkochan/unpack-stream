@@ -81,9 +81,11 @@ export function local (
   dest: string,
   opts?: {
     generateIntegrity?: boolean,
+    ignorable?: (filename: string) => Boolean,
   }
 ) {
   opts = opts || {}
+  const ignore = opts.ignorable && function (filename: string, header: {name: string}) { return opts!.ignorable!(header.name) } || function () { return false }
   const generateIntegrity = opts.generateIntegrity !== false
   const index = {}
   const headers = {}
@@ -95,6 +97,7 @@ export function local (
       .pipe(
         tar.extract(dest, {
           strip: 1,
+          ignore,
           mapStream (fileStream: NodeJS.ReadableStream, header: {name: string}) {
             headers[header.name] = header
             if (generateIntegrity) {
@@ -102,10 +105,12 @@ export function local (
                 ssri.fromStream(fileStream)
                   .then((sri: {}) => {
                     index[header.name] = {
-                      integrity: sri.toString(),
                       type: header['type'],
                       size: header['size'],
                       mtime: header['mtime'],
+                    }
+                    if (sri) {
+                      index[header.name].integrity = sri.toString()
                     }
                   })
               )

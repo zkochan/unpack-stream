@@ -6,6 +6,7 @@ dependencies:
 devDependencies:
   '@types/tape': 4.2.30
   got: 7.1.0
+  ignorable: 1.0.1
   mos: 2.0.0-alpha.3
   mos-plugin-readme: 1.0.4
   rimraf: 2.6.2
@@ -944,6 +945,12 @@ packages:
   /ieee754/1.1.8:
     resolution:
       integrity: sha1-vjPUCsEO8ZJnAfbwii2G+/0a0+Q=
+  /ignorable/1.0.1:
+    dev: true
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha512-Fr7wf72G+INndhhOqDhMt9Z33GC+WXSmV/VKmzk9veSKS9JiY2srAWnGbg0R8a8Wgjhao914OsorLT3Y8Gn01A==
   /imurmurhash/0.1.4:
     dev: true
     engines:
@@ -2513,13 +2520,13 @@ packages:
     resolution:
       integrity: sha1-5a2ryKz0CPY4X8dklWhMiOavaJo=
 registry: 'https://registry.npmjs.org/'
-shrinkwrapMinorVersion: 1
 shrinkwrapVersion: 3
 specifiers:
   '@types/node': ^8.0.14
   '@types/tape': ^4.2.30
   decompress-maybe: ^1.0.0
   got: ^7.0.0
+  ignorable: ^1.0.1
   mos: ^2.0.0-alpha.3
   mos-plugin-readme: ^1.0.4
   rimraf: ^2.6.1
