@@ -12,7 +12,7 @@
     "test": "npm run tsc && ts-node test",
     "md": "mos README.md",
     "tsc": "rimraf dist && tsc",
-    "prepublish": "npm run tsc"
+    "prepublishOnly": "npm run tsc"
   },
   "repository": {
     "type": "git",
