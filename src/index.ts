@@ -22,7 +22,7 @@ export function remote (
   return new Promise((resolve, reject) => {
     const actualShasum = crypto.createHash('sha1')
 
-    if (stream.statusCode !== 200) {
+    if (typeof stream.statusCode === 'number' && stream.statusCode !== 200) {
       return reject(new Error(`Invalid response: ${stream.statusCode}`))
     }
 
