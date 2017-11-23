@@ -9,8 +9,8 @@
   ],
   "scripts": {
     "pretest": "rimraf test/dest",
-    "test": "npm run tsc && ts-node test",
-    "md": "mos README.md",
+    "test": "npm run tsc && preview && ts-node test",
+    "md": "preview && mos README.md",
     "tsc": "rimraf dist && tsc",
     "prepublishOnly": "npm run tsc"
   },
@@ -45,6 +45,7 @@
     "ignorable": "^1.0.1",
     "mos": "^2.0.0-alpha.3",
     "mos-plugin-readme": "^1.0.4",
+    "package-preview": "^1.0.0",
     "rimraf": "^2.6.1",
     "tape": "^4.7.0",
     "ts-node": "^3.0.6",

@@ -1,5 +1,5 @@
 import test = require('tape')
-import unpackStream = require('../src')
+import unpackStream = require('unpack-stream')
 import fs = require('fs')
 import path = require('path')
 import ignore = require('ignorable')
