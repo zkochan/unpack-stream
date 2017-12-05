@@ -60,21 +60,10 @@ export function remote (
 }
 
 export type Index = {
-  headers: {
-    [filename: string]: {
-      type: 'file',
-      size: number,
-      mtime: string,
-    }
+  [filename: string]: {
+    size: number,
+    generatingIntegrity: Promise<string>,
   },
-  integrityPromise: Promise<{
-    [filename: string]: {
-      type: 'file',
-      size: number,
-      integrity: string,
-      mtime: string,
-    }
-  }>
 }
 
 export function local (
@@ -102,34 +91,15 @@ export function local (
           mapStream (fileStream: NodeJS.ReadableStream, header: {name: string}) {
             headers[header.name] = header
             if (generateIntegrity) {
-              integrityPromises.push(
-                ssri.fromStream(fileStream)
-                  .then((sri: {}) => {
-                    index[header.name] = {
-                      type: header['type'],
-                      size: header['size'],
-                      mtime: header['mtime'],
-                    }
-                    if (sri) {
-                      index[header.name].integrity = sri.toString()
-                    }
-                  })
-              )
+              headers[header.name].generatingIntegrity = ssri.fromStream(fileStream)
+                .then((sri: {}) => sri.toString())
             }
             return fileStream
           },
         })
       ).on('error', reject)
       .on('finish', () => {
-        if (generateIntegrity) {
-          resolve({
-            headers,
-            integrityPromise: Promise.all(integrityPromises)
-              .then(() => index)
-          })
-          return
-        }
-        resolve({ headers })
+        resolve(headers)
       })
   })
 }

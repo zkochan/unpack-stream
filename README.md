@@ -20,30 +20,25 @@ npm i -S unpack-stream
 const got = require('got')
 const unpackStream = require('unpack-stream')
 
-const tarball = 'http://registry.npmjs.org/is-negative/-/is-negative-2.1.0.tgz'
+const tarball = 'https://registry.npmjs.org/is-negative/-/is-negative-2.1.0.tgz'
 const stream = got.stream(tarball)
 unpackStream.remote(stream, './tmp')
-  .then(index => console.log(index))
-  //> { 'package.json':
-  //     { integrity: 'sha512-RA0APKvtxz85WYCFX3M/TkVeJZZBcylEwh+GrV7uO/NNJO4G3rzgTrpsypp9AU2hM2QBk9SxCHi1Gb9aaWzpYg==',
-  //       type: 'file',
-  //       size: 543,
-  //       mtime: '2016-01-11T15:24:07.000Z' },
-  //    'index.js':
-  //     { integrity: 'sha512-3dL1OHn8VWhVDT37f3ZBdou4NrYq2ll//W1lWqx7+4tKBW/WqUx3mDcGyqrBfBeWTIPCd+RiUdF7hp3MQYB9+g==',
-  //       type: 'file',
-  //       size: 106,
-  //       mtime: '2016-01-11T15:17:59.000Z' },
-  //    license:
-  //     { integrity: 'sha512-lSw93JVg7wfwyVXKrg6yIFjF9Bidgr+tA/l6XNlrRhjnE6NhwkyPL3xNL47OZScS8qoQkYUwE6slmo7jGesH0Q==',
-  //       type: 'file',
-  //       size: 1125,
-  //       mtime: '2016-01-11T15:17:38.000Z' },
-  //    'readme.md':
-  //     { integrity: 'sha512-fM882axp7XaC6nzj5XYuzB0KhYpYwwsR3RjyiqOcIrI6C0b9KxrEEug9VpKTfbSbqTOmZ2KEqZLPKrMXFW1Y+g==',
-  //       type: 'file',
-  //       size: 792,
-  //       mtime: '2016-01-11T15:20:32.000Z' } }
+  .then(index =>
+    Promise.all(
+      Object.keys(index)
+        .map(filename =>
+          index[filename].generatingIntegrity.then(integrity => ({filename, integrity})))
+    )
+  )
+  .then(files => console.log(files))
+  //> [ { filename: 'package.json',
+  //      integrity: 'sha512-RA0APKvtxz85WYCFX3M/TkVeJZZBcylEwh+GrV7uO/NNJO4G3rzgTrpsypp9AU2hM2QBk9SxCHi1Gb9aaWzpYg==' },
+  //    { filename: 'index.js',
+  //      integrity: 'sha512-3dL1OHn8VWhVDT37f3ZBdou4NrYq2ll//W1lWqx7+4tKBW/WqUx3mDcGyqrBfBeWTIPCd+RiUdF7hp3MQYB9+g==' },
+  //    { filename: 'license',
+  //      integrity: 'sha512-lSw93JVg7wfwyVXKrg6yIFjF9Bidgr+tA/l6XNlrRhjnE6NhwkyPL3xNL47OZScS8qoQkYUwE6slmo7jGesH0Q==' },
+  //    { filename: 'readme.md',
+  //      integrity: 'sha512-fM882axp7XaC6nzj5XYuzB0KhYpYwwsR3RjyiqOcIrI6C0b9KxrEEug9VpKTfbSbqTOmZ2KEqZLPKrMXFW1Y+g==' } ]
 ```
 <!--/@-->
 
@@ -74,4 +69,4 @@ Unpacks a stream from the local filesystem.
 
 ## License
 
-[MIT](./LICENSE) © [Zoltan Kochan](http://kochan.io)
+[MIT](./LICENSE) © [Zoltan Kochan](https://www.kochan.io)
