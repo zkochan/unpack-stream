@@ -92,7 +92,6 @@ export function local (
             headers[header.name] = header
             if (generateIntegrity) {
               headers[header.name].generatingIntegrity = ssri.fromStream(fileStream)
-                .then((sri: {}) => sri.toString())
             }
             return fileStream
           },

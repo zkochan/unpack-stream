@@ -14,6 +14,7 @@ test('unpack local tarball', t => {
     })
     .then(integrity => {
       t.ok(integrity)
+      t.ok(typeof integrity === 'object')
       t.end()
     })
     .catch(t.end)
