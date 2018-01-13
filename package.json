@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "pretest": "rimraf test/dest",
-    "test": "npm run tsc && preview && ts-node test",
+    "test": "npm run tsc && preview && ts-node test --type-check",
     "md": "preview && mos README.md",
     "tsc": "rimraf dist && tsc",
     "prepublishOnly": "npm run tsc"
@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/zkochan/unpack-stream#readme",
   "dependencies": {
-    "@types/node": "^8.0.14",
+    "@types/node": "^9.3.0",
     "decompress-maybe": "^1.0.0",
     "ssri": "^5.0.0",
     "tar-fs": "^1.14.0"
@@ -48,7 +48,7 @@
     "package-preview": "^1.0.0",
     "rimraf": "^2.6.1",
     "tape": "^4.7.0",
-    "ts-node": "^3.0.6",
+    "ts-node": "^4.1.0",
     "typescript": "^2.4.2"
   },
   "mos": {
