@@ -49,7 +49,7 @@ test('set dir permissions when unpacking tarball', t => {
   const dest = path.join(__dirname, 'dest')
   unpackStream.local(fs.createReadStream(tarballLoc), dest)
     .then(index => {
-      t.ok(Object.keys(index).includes('CHANGELOG.md'))
+      t.ok(Object.keys(index).indexOf('CHANGELOG.md') >= 0)
       t.end()
     })
     .catch(() => {
