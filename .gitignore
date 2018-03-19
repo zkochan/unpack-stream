@@ -40,3 +40,6 @@ dist
 tmp
 
 test/dest
+
+# JetBrains IDEs
+.idea/

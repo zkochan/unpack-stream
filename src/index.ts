@@ -88,6 +88,7 @@ export function local (
         tar.extract(dest, {
           strip: 1,
           ignore,
+          dmode: parseInt("775", 8),
           mapStream (fileStream: NodeJS.ReadableStream, header: {name: string}) {
             headers[header.name] = header
             if (generateIntegrity) {
