@@ -3,6 +3,7 @@ dependencies:
   decompress-maybe: 1.0.0
   ssri: 5.2.4
   tar-fs: 1.16.0
+  unpack-stream: 'link:../__package_previews__/unpack-stream/unpack-stream'
 devDependencies:
   '@types/tape': 4.2.31
   got: 8.2.0

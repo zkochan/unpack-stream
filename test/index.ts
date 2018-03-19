@@ -43,3 +43,17 @@ test("unpack only the files that are not ignored", t => {
     })
     .catch(t.end)
 })
+
+test('set dir permissions when unpacking tarball', t => {
+  const tarballLoc = path.join(__dirname, 'kitsu-bad-dir-permissions-5.0.6.tgz')
+  const dest = path.join(__dirname, 'dest')
+  unpackStream.local(fs.createReadStream(tarballLoc), dest)
+    .then(index => {
+      t.ok(Object.keys(index).includes('CHANGELOG.md'))
+      t.end()
+    })
+    .catch(() => {
+      t.ok(false, "could not unpack kitsu")
+      t.end()
+    })
+})
