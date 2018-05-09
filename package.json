@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/zkochan/unpack-stream#readme",
   "dependencies": {
-    "@types/node": "^9.3.0",
+    "@types/node": "^10.0.0",
     "decompress-maybe": "^1.0.0",
     "ssri": "^5.0.0",
     "tar-fs": "^1.14.0"
