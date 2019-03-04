@@ -1,8 +1,11 @@
 import crypto = require('crypto')
 import decompress = require('decompress-maybe')
+import isWindows = require('is-windows')
 import tar = require('tar-fs')
 import {IncomingMessage} from 'http'
 import ssri = require('ssri')
+
+const IS_WINDOWS = isWindows()
 
 export type UnpackProgress = (downloaded: number, totalSize: number) => void
 
@@ -66,6 +69,35 @@ export type Index = {
   },
 }
 
+const createIgnorer = !IS_WINDOWS
+  ? (ignore?: (filename: string) => Boolean) => {
+    if (ignore) {
+      return (filename: string, header: {name: string}) => ignore(header.name)
+    }
+    return () => false
+  }
+  : (ignore?: (filename: string) => Boolean) => {
+    const lowercaseFiles = new Set<string>()
+    if (ignore) {
+      return (filename: string, header: {name: string}) => {
+        const lowercaseFilename = filename.toLowerCase()
+        if (lowercaseFiles.has(lowercaseFilename)) {
+          return true
+        }
+        lowercaseFiles.add(lowercaseFilename)
+        return ignore(header.name)
+      }
+    }
+    return (filename: string, header: {name: string}) => {
+      const lowercaseFilename = filename.toLowerCase()
+      if (lowercaseFiles.has(lowercaseFilename)) {
+        return true
+      }
+      lowercaseFiles.add(lowercaseFilename)
+      return false
+    }
+  }
+
 export function local (
   stream: NodeJS.ReadableStream,
   dest: string,
@@ -75,11 +107,9 @@ export function local (
   }
 ) {
   opts = opts || {}
-  const ignore = opts.ignore && function (filename: string, header: {name: string}) { return opts!.ignore!(header.name) } || function () { return false }
+  const ignore = createIgnorer(opts.ignore)
   const generateIntegrity = opts.generateIntegrity !== false
-  const index = {}
   const headers = {}
-  const integrityPromises: Promise<{}>[] = []
   return new Promise((resolve, reject) => {
     stream
       .on('error', reject)
