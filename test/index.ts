@@ -1,12 +1,8 @@
-import isWindows = require('is-windows')
 import test = require('tape')
-import tempy = require('tempy')
 import unpackStream = require('unpack-stream')
 import fs = require('fs')
 import path = require('path')
 import ignore = require('ignorable')
-
-const IS_WINDOWS = isWindows()
 
 test('unpack local tarball', t => {
   const tarballLoc = path.join(__dirname, 'babel-helper-hoist-variables-6.24.1.tgz')
@@ -60,21 +56,4 @@ test('set dir permissions when unpacking tarball', t => {
       t.ok(false, "could not unpack kitsu")
       t.end()
     })
-})
-
-test('unpack tarball that has files with same name', t => {
-  const tarballLoc = path.join(__dirname, 'with-same-file-in-different-cases-1.0.0.tgz')
-  const dest = tempy.directory()
-  t.comment(`dest dir ${dest}`)
-  unpackStream.local(fs.createReadStream(tarballLoc), dest)
-    .then(index => {
-      t.deepEqual(Object.keys(index), IS_WINDOWS ? ['package.json', 'foo.js'] : ['package.json', 'foo.js', 'Foo.js'])
-      return index['package.json'].generatingIntegrity
-    })
-    .then(integrity => {
-      t.ok(integrity)
-      t.ok(typeof integrity === 'object')
-      t.end()
-    })
-    .catch(t.end)
 })

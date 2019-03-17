@@ -34,16 +34,13 @@
   },
   "homepage": "https://github.com/zkochan/unpack-stream#readme",
   "dependencies": {
-    "@types/is-windows": "^0.2.0",
     "@types/node": "^10.0.8",
     "decompress-maybe": "^1.0.0",
-    "is-windows": "^1.0.2",
     "ssri": "^6.0.0",
     "tar-fs": "^2.0.0"
   },
   "devDependencies": {
     "@types/tape": "^4.2.30",
-    "@types/tempy": "^0.2.0",
     "got": "^8.0.0",
     "ignorable": "^1.0.1",
     "mos": "^2.0.0-alpha.3",
@@ -51,7 +48,6 @@
     "package-preview": "^2.0.0",
     "rimraf": "^2.6.1",
     "tape": "^4.7.0",
-    "tempy": "^0.2.1",
     "ts-node": "^8.0.2",
     "typescript": "^3.0.0"
   },
