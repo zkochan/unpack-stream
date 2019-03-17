@@ -2,11 +2,5 @@
   "extends": [
     "config:base",
     ":preserveSemverRanges"
-  ],
-  "packageRules": [
-    {
-      "packageNames": ["got"],
-      "allowedVersions": "<=8"
-    }
   ]
 }

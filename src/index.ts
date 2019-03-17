@@ -77,9 +77,7 @@ export function local (
   opts = opts || {}
   const ignore = opts.ignore && function (filename: string, header: {name: string}) { return opts!.ignore!(header.name) } || function () { return false }
   const generateIntegrity = opts.generateIntegrity !== false
-  const index = {}
   const headers = {}
-  const integrityPromises: Promise<{}>[] = []
   return new Promise((resolve, reject) => {
     stream
       .on('error', reject)
@@ -97,7 +95,8 @@ export function local (
             return fileStream
           },
         })
-      ).on('error', reject)
+      )
+      .on('error', reject)
       .on('finish', () => {
         resolve(headers)
       })

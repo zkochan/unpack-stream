@@ -34,14 +34,14 @@
   },
   "homepage": "https://github.com/zkochan/unpack-stream#readme",
   "dependencies": {
-    "@types/node": "^10.0.8",
+    "@types/node": "*",
     "decompress-maybe": "^1.0.0",
     "ssri": "^6.0.0",
     "tar-fs": "^2.0.0"
   },
   "devDependencies": {
     "@types/tape": "^4.2.30",
-    "got": "^8.0.0",
+    "got": "^9.6.0",
     "ignorable": "^1.0.1",
     "mos": "^2.0.0-alpha.3",
     "mos-plugin-readme": "^1.0.4",
@@ -60,6 +60,6 @@
     }
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=8"
   }
 }
