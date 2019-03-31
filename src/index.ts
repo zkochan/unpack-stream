@@ -1,7 +1,7 @@
 import crypto = require('crypto')
 import decompress = require('decompress-maybe')
 import tar = require('tar-fs')
-import {IncomingMessage} from 'http'
+import { IncomingMessage } from 'http'
 import ssri = require('ssri')
 
 export type UnpackProgress = (downloaded: number, totalSize: number) => void
@@ -85,10 +85,9 @@ export function local (
       .pipe(
         tar.extract(dest, {
           chown: false, // Don't chown. Just leave as it is
-          strip: 1,
-          ignore,
           dmode: 0o755, // All directories should be readable
           fmode: 0o644, // All files should be readable
+          ignore,
           mapStream (fileStream: NodeJS.ReadableStream, header: {name: string}) {
             headers[header.name] = header
             if (generateIntegrity) {
@@ -96,6 +95,7 @@ export function local (
             }
             return fileStream
           },
+          strip: 1,
         })
       )
       .on('error', reject)
