@@ -87,7 +87,8 @@ export function local (
           chown: false, // Don't chown. Just leave as it is
           strip: 1,
           ignore,
-          dmode: parseInt("775", 8),
+          dmode: 0o755, // All directories should be readable
+          fmode: 0o644, // All files should be readable
           mapStream (fileStream: NodeJS.ReadableStream, header: {name: string}) {
             headers[header.name] = header
             if (generateIntegrity) {
