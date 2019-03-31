@@ -84,6 +84,7 @@ export function local (
       .pipe(decompress()).on('error', reject)
       .pipe(
         tar.extract(dest, {
+          chown: false, // Don't chown. Just leave as it is
           strip: 1,
           ignore,
           dmode: parseInt("775", 8),
