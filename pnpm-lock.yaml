@@ -1,10 +1,12 @@
 dependencies:
-  '@types/node': 11.12.2
+  '@types/node': 11.13.8
+  '@types/ssri': 6.0.1
   decompress-maybe: 1.0.0
   ssri: 6.0.1
   tar-fs: 2.0.0
 devDependencies:
   '@types/tape': 4.2.33
+  '@types/tar-fs': 1.16.1
   got: 9.6.0
   ignorable: 1.1.2
   mos: 2.0.0-alpha.3
@@ -20,7 +22,7 @@ packages:
     dependencies:
       '@pnpm/self-installer': 2.0.8
       '@types/got': 8.3.5
-      '@types/node': 10.14.4
+      '@types/node': 10.14.6
       command-exists: 1.2.8
       cross-spawn: 6.0.5
     dev: true
@@ -50,13 +52,13 @@ packages:
       integrity: sha512-XIB2XbzHTN6ieIjfIMV9hlVcfPU26s2vafYWQcZHWXHOxiaRZYEDKEwdl129Zyg50+foYV2jCgtrqSA6qNuNSA==
   /@types/fs-extra/5.0.5:
     dependencies:
-      '@types/node': 11.12.2
+      '@types/node': 11.13.8
     dev: true
     resolution:
       integrity: sha512-w7iqhDH9mN8eLClQOYTkhdYUOSpp25eXxfc6VbFOGtzxW34JcvctH2bKjj4jD4++z4R5iO5D+pg48W2e03I65A==
   /@types/got/8.3.5:
     dependencies:
-      '@types/node': 11.12.2
+      '@types/node': 11.13.8
     dev: true
     resolution:
       integrity: sha512-AaXSrIF99SjjtPVNmCmYb388HML+PKEJb/xmj4SbL2ZO0hHuETZZzyDIKfOqaEoAHZEuX4sC+FRFrHYJoIby6A==
@@ -66,23 +68,33 @@ packages:
       integrity: sha1-byTuSHMdMRaOpRBhDW3RXl/Jxv8=
   /@types/mz/0.0.32:
     dependencies:
-      '@types/node': 11.12.2
+      '@types/node': 11.13.8
     dev: true
     resolution:
       integrity: sha512-cy3yebKhrHuOcrJGkfwNHhpTXQLgmXSv1BX+4p32j+VUQ6aP2eJ5cL7OvGcAQx75fCTFaAIIAKewvqL+iwSd4g==
-  /@types/node/10.14.4:
+  /@types/node/10.14.6:
     dev: true
     resolution:
-      integrity: sha512-DT25xX/YgyPKiHFOpNuANIQIVvYEwCWXgK2jYYwqgaMrYE6+tq+DtmMwlD3drl6DJbUwtlIDnn0d7tIn/EbXBg==
-  /@types/node/11.12.2:
+      integrity: sha512-Fvm24+u85lGmV4hT5G++aht2C5I4Z4dYlWZIh62FAfFO/TfzXtPpoLI6I7AuBWkIFqZCnhFOoTT7RjjaIL5Fjg==
+  /@types/node/11.13.8:
     resolution:
-      integrity: sha512-c82MtnqWB/CqqK7/zit74Ob8H1dBdV7bK+BcErwtXbe0+nUGkgzq5NTDmRW/pAv2lFtmeNmW95b0zK2hxpeklg==
+      integrity: sha512-szA3x/3miL90ZJxUCzx9haNbK5/zmPieGraZEe4WI+3srN0eGLiT22NXeMHmyhNEopn+IrxqMc7wdVwvPl8meg==
+  /@types/ssri/6.0.1:
+    dev: false
+    resolution:
+      integrity: sha512-Sf5NnDETSFGTHXIfG4zTTczRFhGEjSCfwfvHZ5oFmyX0fUA5BJKV/hdQ2zDnfcC6WXvE78ZTh+/18VzMyMM1QQ==
   /@types/tape/4.2.33:
     dependencies:
-      '@types/node': 11.12.2
+      '@types/node': 11.13.8
     dev: true
     resolution:
       integrity: sha512-ltfyuY5BIkYlGuQfwqzTDT8f0q8Z5DGppvUnWGs39oqDmMd6/UWhNpX3ZMh/VYvfxs3rFGHMrLC/eGRdLiDGuw==
+  /@types/tar-fs/1.16.1:
+    dependencies:
+      '@types/node': 11.13.8
+    dev: true
+    resolution:
+      integrity: sha512-uQQIaa8ukcKf/1yy2kzfP1PF+7jEZghFDKpDvgtsYo/mbqM1g4Qza1Y5oAw6kJMa7eLA/HkmxUsDqb2sWKVF9g==
   /@zkochan/async-replace/0.4.1:
     dependencies:
       babel-run-async: 1.0.0
@@ -1945,7 +1957,7 @@ packages:
       '@pnpm/exec': 1.1.5
       '@types/fs-extra': 5.0.5
       '@types/mz': 0.0.32
-      '@types/node': 10.14.4
+      '@types/node': 10.14.6
       cross-spawn: 6.0.5
       find-down: 0.1.4
       fs-extra: 7.0.1
@@ -2867,7 +2879,7 @@ packages:
   /unpack-stream/4.0.2:
     dependencies:
       '@types/is-windows': 0.2.0
-      '@types/node': 10.14.4
+      '@types/node': 10.14.6
       decompress-maybe: 1.0.0
       is-windows: 1.0.2
       ssri: 6.0.1
@@ -3028,7 +3040,9 @@ packages:
       integrity: sha512-+Wo/p5VRfxUgBUGy2j/6KX2mj9AYJWOHuhMjMcbBFc3y54o9/4buK1ksBvuiK01C3kby8DH9lSmJdSxw+4G/2Q==
 specifiers:
   '@types/node': '*'
-  '@types/tape': ^4.2.30
+  '@types/ssri': ^6.0.1
+  '@types/tape': ^4.2.33
+  '@types/tar-fs': ^1.16.1
   decompress-maybe: ^1.0.0
   got: ^9.6.0
   ignorable: ^1.0.1

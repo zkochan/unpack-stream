@@ -35,12 +35,14 @@
   "homepage": "https://github.com/zkochan/unpack-stream#readme",
   "dependencies": {
     "@types/node": "*",
+    "@types/ssri": "^6.0.1",
     "decompress-maybe": "^1.0.0",
     "ssri": "^6.0.0",
     "tar-fs": "^2.0.0"
   },
   "devDependencies": {
-    "@types/tape": "^4.2.30",
+    "@types/tape": "^4.2.33",
+    "@types/tar-fs": "^1.16.1",
     "got": "^9.6.0",
     "ignorable": "^1.0.1",
     "mos": "^2.0.0-alpha.3",
