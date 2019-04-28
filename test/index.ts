@@ -10,7 +10,7 @@ test('unpack local tarball', t => {
   unpackStream.local(fs.createReadStream(tarballLoc), dest)
     .then(index => {
       t.deepEqual(Object.keys(index), ['package.json', '.npmignore', 'README.md', 'lib/index.js'])
-      return index['package.json'].generatingIntegrity
+      return index['package.json'].generatingIntegrity!
     })
     .then(integrity => {
       t.ok(integrity)
