@@ -3,24 +3,22 @@ import decompress = require('decompress-maybe')
 import tar = require('tar-fs')
 import { IncomingMessage } from 'http'
 import ssri = require('ssri')
+import { Duplex } from 'stream';
 
 export type UnpackProgress = (downloaded: number, totalSize: number) => void
 
-export type UnpackRemoteStreamOptions = {
+export interface UnpackRemoteStreamOptions extends UnpackLocalStreamOptions {
   onStart?: () => void,
   onProgress?: UnpackProgress,
   shasum?: string,
-  generateIntegrity?: boolean,
-  ignore?: (filename: string) => Boolean,
 }
 
 export function remote (
   stream: IncomingMessage,
   dest: string,
-  opts: UnpackRemoteStreamOptions
+  opts: UnpackRemoteStreamOptions = {},
 ) {
-  opts = opts || {}
-  return new Promise((resolve, reject) => {
+  return new Promise<Index>((resolve, reject) => {
     const actualShasum = crypto.createHash('sha1')
 
     if (typeof stream.statusCode === 'number' && stream.statusCode !== 200) {
@@ -47,7 +45,7 @@ export function remote (
     // without pausing, gunzip/tar-fs would miss the beginning of the stream
     if (stream.resume) stream.resume()
 
-    function finish (index: {}) {
+    function finish (index: Index) {
       const digest = actualShasum.digest('hex')
       if (opts.shasum && digest !== opts.shasum) {
         reject(new Error(`Incorrect shasum (expected ${opts.shasum}, got ${digest})`))
@@ -62,33 +60,36 @@ export function remote (
 export type Index = {
   [filename: string]: {
     size: number,
-    generatingIntegrity: Promise<string>,
+    generatingIntegrity?: Promise<ssri.IntegrityMap>,
   },
+}
+
+export interface UnpackLocalStreamOptions {
+  generateIntegrity?: boolean,
+  ignore?: (filename: string) => boolean,
 }
 
 export function local (
   stream: NodeJS.ReadableStream,
   dest: string,
-  opts?: {
-    generateIntegrity?: boolean,
-    ignore?: (filename: string) => Boolean,
-  }
+  opts: UnpackLocalStreamOptions = {}
 ) {
-  opts = opts || {}
-  const ignore = opts.ignore && function (filename: string, header: {name: string}) { return opts!.ignore!(header.name) } || function () { return false }
+  const ignore = opts.ignore ? function (filename: string, header?: {name: string}) {
+    return opts.ignore!((header && header.name) || filename)
+  } : function () { return false }
   const generateIntegrity = opts.generateIntegrity !== false
-  const headers = {}
-  return new Promise((resolve, reject) => {
+  const headers: Index = {}
+  return new Promise<Index>((resolve, reject) => {
     stream
       .on('error', reject)
-      .pipe(decompress()).on('error', reject)
+      .pipe(decompress() as Duplex).on('error', reject)
       .pipe(
         tar.extract(dest, {
           chown: false, // Don't chown. Just leave as it is
           dmode: 0o755, // All directories should be readable
           fmode: 0o644, // All files should be readable
           ignore,
-          mapStream (fileStream: NodeJS.ReadableStream, header: {name: string}) {
+          mapStream (fileStream, header) {
             headers[header.name] = header
             if (generateIntegrity) {
               headers[header.name].generatingIntegrity = ssri.fromStream(fileStream)
@@ -96,7 +97,7 @@ export function local (
             return fileStream
           },
           strip: 1,
-        })
+        } as tar.ExtractOptions)
       )
       .on('error', reject)
       .on('finish', () => {
