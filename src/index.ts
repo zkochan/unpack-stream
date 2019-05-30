@@ -3,7 +3,10 @@ import decompress = require('decompress-maybe')
 import tar = require('tar-fs')
 import { IncomingMessage } from 'http'
 import ssri = require('ssri')
+import { IntegrityMap } from 'ssri'
 import { Duplex } from 'stream';
+
+export { IntegrityMap }
 
 export type UnpackProgress = (downloaded: number, totalSize: number) => void
 
