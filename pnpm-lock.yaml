@@ -1,7 +1,7 @@
 dependencies:
   '@types/ssri': 6.0.1
   decompress-maybe: 1.0.0
-  ssri: 7.1.0
+  ssri: 8.0.0
   tar-fs: 2.0.0
 devDependencies:
   '@types/node': 12.12.17
@@ -918,6 +918,7 @@ packages:
     resolution:
       integrity: sha1-LUH1Y+H+QA7Uli/hpNXGp1Od9/Y=
   /figgy-pudding/3.5.1:
+    dev: true
     resolution:
       integrity: sha512-vNKxJHTEKNThjfrdJwHc7brvM6eVevuO5nTj6ez8ZQ1qbXTvGthucRF7S4vf2cr71QVnT70V34v0S1DyQsti0w==
   /figures/1.7.0:
@@ -2729,15 +2730,14 @@ packages:
     dev: true
     resolution:
       integrity: sha512-3Wge10hNcT1Kur4PDFwEieXSCMCJs/7WvSACcrMYrNp+b8kDL1/0wJch5Ni2WrtwEa2IO8OsVfeKIciKCDx/QA==
-  /ssri/7.1.0:
+  /ssri/8.0.0:
     dependencies:
-      figgy-pudding: 3.5.1
       minipass: 3.1.1
     dev: false
     engines:
       node: '>= 8'
     resolution:
-      integrity: sha512-77/WrDZUWocK0mvA5NTRQyveUf+wsrIc6vyrxpS8tVvYBcX215QbafrJR3KtkpskIzoFLqqNuuYQvxaMjXJ/0g==
+      integrity: sha512-aq/pz989nxVYwn16Tsbj1TqFpD5LLrQxHf5zaHuieFV+R0Bbr4y8qUsOA45hXT/N4/9UNXTarBjnjVmjSOVaAA==
   /stream-shift/1.0.1:
     resolution:
       integrity: sha512-AiisoFqQ0vbGcZgQPY1cdP2I76glaVA/RauYR4G4thNFgkTqr90yXTo4LYX60Jl+sIlPNHHdGSwo01AvbKUSVQ==
@@ -3266,7 +3266,7 @@ specifiers:
   mos-plugin-readme: ^1.0.4
   package-preview: ^3.0.0
   rimraf: ^3.0.0
-  ssri: ^7.0.0
+  ssri: ^8.0.0
   tape: ^4.7.0
   tar-fs: ^2.0.0
   ts-node: ^8.0.2
