@@ -6,7 +6,7 @@ dependencies:
 devDependencies:
   '@types/node': 12.12.17
   '@types/tape': 4.2.33
-  '@types/tar-fs': 1.16.1
+  '@types/tar-fs': 2.0.0
   got: 10.0.4
   ignorable: 1.1.2
   mos: 2.0.0-alpha.3
@@ -97,6 +97,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-Is+l3mcHvs47sKy+afn2O1rV4ldZFU7W8101cNlOd+MRbjM4Onida8jSZnJdTe/0Pcf25g9BNIUsuugmE6puHA==
+  /@types/node/12.12.37:
+    dev: true
+    resolution:
+      integrity: sha512-4mXKoDptrXAwZErQHrLzpe0FN/0Wmf5JRniSVIdwUrtDf9wnmEV1teCNLBo/TwuXhkK/bVegoEn/wmb+x0AuPg==
   /@types/responselike/1.0.0:
     dependencies:
       '@types/node': 12.12.17
@@ -112,12 +116,19 @@ packages:
     dev: true
     resolution:
       integrity: sha512-ltfyuY5BIkYlGuQfwqzTDT8f0q8Z5DGppvUnWGs39oqDmMd6/UWhNpX3ZMh/VYvfxs3rFGHMrLC/eGRdLiDGuw==
-  /@types/tar-fs/1.16.1:
+  /@types/tar-fs/2.0.0:
     dependencies:
-      '@types/node': 12.12.17
+      '@types/node': 12.12.37
+      '@types/tar-stream': 2.1.0
     dev: true
     resolution:
-      integrity: sha512-uQQIaa8ukcKf/1yy2kzfP1PF+7jEZghFDKpDvgtsYo/mbqM1g4Qza1Y5oAw6kJMa7eLA/HkmxUsDqb2sWKVF9g==
+      integrity: sha512-3H2HmxuT1OCZYXi1KG5xIjbpv97JjdLSRByH13YhHK8lr+GaJndJ91IuQfHxn23BQRaWHf2LTnlHPQcQDzt8vw==
+  /@types/tar-stream/2.1.0:
+    dependencies:
+      '@types/node': 12.12.37
+    dev: true
+    resolution:
+      integrity: sha512-s1UQxQUVMHbSkCC0X4qdoiWgHF8DoyY1JjQouFsnk/8ysoTdBaiCHud/exoAZzKDbzAXVc+ah6sczxGVMAohFw==
   /@zkochan/async-replace/0.4.1:
     dependencies:
       babel-run-async: 1.0.0
@@ -3525,7 +3536,7 @@ specifiers:
   '@types/node': ^12.0.4
   '@types/ssri': ^6.0.1
   '@types/tape': ^4.2.33
-  '@types/tar-fs': ^1.16.1
+  '@types/tar-fs': ^2.0.0
   decompress-maybe: ^1.0.0
   got: ^10.0.0
   ignorable: ^1.0.1
