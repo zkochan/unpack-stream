@@ -7,7 +7,7 @@ devDependencies:
   '@types/node': 12.12.17
   '@types/tape': 4.2.33
   '@types/tar-fs': 2.0.0
-  got: 10.0.4
+  got: 11.0.2
   ignorable: 1.1.2
   mos: 2.0.0-alpha.3
   mos-plugin-readme: 1.0.4
@@ -50,25 +50,25 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-AgE3bPlVZxD4kmt7sjTrDlkA8jdtPk4WwW6pJROrW1sK69W6s8kvILbq+urngz5ya73D+i3yuFVQVjTqSINzcQ==
-  /@sindresorhus/is/1.2.0:
-    dev: true
-    engines:
-      node: '>=8'
-    resolution:
-      integrity: sha512-mwhXGkRV5dlvQc4EgPDxDxO6WuMBVymGFd1CA+2Y+z5dG9MNspoQ+AWjl/Ld1MnpCL8AKbosZlDVohqcIwuWsw==
-  /@szmarczak/http-timer/3.1.1:
-    dependencies:
-      defer-to-connect: 1.1.1
+  /@sindresorhus/is/2.1.1:
     dev: true
     engines:
       node: '>=10'
     resolution:
-      integrity: sha512-F7vS53bV9NXT+mmYFeSBr2nXaOI1h6qxdlLDVP+4CPG/c60MMStT7aaqYD2TSNWob1DA3GH9ikFY0UW31bUsWA==
+      integrity: sha512-/aPsuoj/1Dw/kzhkgz+ES6TxG0zfTMGLwuK2ZG00k/iJzYHTLCE8mVU8EPqEOp/lmxPoq1C1C9RYToRKb2KEfg==
+  /@szmarczak/http-timer/4.0.5:
+    dependencies:
+      defer-to-connect: 2.0.0
+    dev: true
+    engines:
+      node: '>=10'
+    resolution:
+      integrity: sha512-PyRA9sm1Yayuj5OIoJ1hGt2YISX45w9WcFbh6ddT0Z/0yaFxOtGLInr4jUfU1EAFVs0Yfyfev4RNwBlUaHdlDQ==
   /@types/cacheable-request/6.0.1:
     dependencies:
       '@types/http-cache-semantics': 4.0.0
-      '@types/keyv': 3.1.0
-      '@types/node': 12.12.17
+      '@types/keyv': 3.1.1
+      '@types/node': 12.12.37
       '@types/responselike': 1.0.0
     dev: true
     resolution:
@@ -83,12 +83,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-c3Xy026kOF7QOTn00hbIllV1dLR9hG9NkSrLQgCVs8NF6sBU+VGWjD3wLPhmh1TYAc7ugCFsvHYMN4VcBN1U1A==
-  /@types/keyv/3.1.0:
+  /@types/keyv/3.1.1:
     dependencies:
-      '@types/node': 12.12.17
+      '@types/node': 12.12.37
     dev: true
     resolution:
-      integrity: sha512-OxT2IEeRdwvoUyp8n1v1hTIFzATb3NQYN8OHv/XbXRHiF2DXwKyzoI4UUaQgwZkRflLaSgyttat+RfWgsKIMIQ==
+      integrity: sha512-MPtoySlAZQ37VoLaPcTHCu1RWJ4llDkULYZIzOYxlhxBqYPB0RsRlmMU0R6tahtFe27mIdkHV+551ZWV4PLmVw==
   /@types/node/10.17.9:
     dev: true
     resolution:
@@ -103,7 +103,7 @@ packages:
       integrity: sha512-4mXKoDptrXAwZErQHrLzpe0FN/0Wmf5JRniSVIdwUrtDf9wnmEV1teCNLBo/TwuXhkK/bVegoEn/wmb+x0AuPg==
   /@types/responselike/1.0.0:
     dependencies:
-      '@types/node': 12.12.17
+      '@types/node': 12.12.37
     dev: true
     resolution:
       integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==
@@ -475,18 +475,18 @@ packages:
     hasBin: true
     resolution:
       integrity: sha1-ya73AIprlDy+mcxhcSXrS9R4KWs=
-  /cacheable-lookup/0.2.1:
-    dependencies:
-      keyv: 3.1.0
+  /cacheable-lookup/4.2.1:
     dev: true
+    engines:
+      node: '>=10'
     resolution:
-      integrity: sha512-BQ8MRjxJASEq2q+w0SusPU3B054gS278K8sj58QCLMZIso5qG05+MdCdmXxuyVlfvI8h4bPsNOavVUauVCGxrg==
-  /cacheable-request/7.0.0:
+      integrity: sha512-DqtvWnUbBJgpOvgYctguN4jl36gjAZIQ/BjnSMsiK8/ubm1XIqi5qn40PRoyqaPAVZccXrwB+75Mhubcr5v+5A==
+  /cacheable-request/7.0.1:
     dependencies:
       clone-response: 1.0.2
       get-stream: 5.1.0
-      http-cache-semantics: 4.0.3
-      keyv: 3.1.0
+      http-cache-semantics: 4.1.0
+      keyv: 4.0.0
       lowercase-keys: 2.0.0
       normalize-url: 4.5.0
       responselike: 2.0.0
@@ -494,7 +494,7 @@ packages:
     engines:
       node: '>=8'
     resolution:
-      integrity: sha512-UVG4gMn3WjnAeFBBx7RFoprgOANIAkMwN5Dta6ONmfSwrCxfm0Ip7g0mIBxIRJZX9aDsoID0Ry3dU5Pr0csKKA==
+      integrity: sha512-lt0mJ6YAnsrBErpTMWeu5kl/tg9xMAWjavYTN6VQXM1A/teBITuNcccXsCxF0tDQQJf9DfAaX5O4e0zp0KlfZw==
   /caller-path/0.1.0:
     dependencies:
       callsites: 0.2.0
@@ -783,7 +783,7 @@ packages:
       integrity: sha1-rf54xmzAaeZOgkvRQFuF515tHLs=
   /decompress-response/5.0.0:
     dependencies:
-      mimic-response: 2.0.0
+      mimic-response: 2.1.0
     dev: true
     engines:
       node: '>=10'
@@ -818,10 +818,12 @@ packages:
       node: '>=4.0.0'
     resolution:
       integrity: sha512-LOHxIOaPYdHlJRtCQfDIVZtfw/ufM8+rVj649RIHzcm/vGwQRXFt6OPqIFWsm2XEMrNIEtWR64sY1LEKD2vAOA==
-  /defer-to-connect/1.1.1:
+  /defer-to-connect/2.0.0:
     dev: true
+    engines:
+      node: '>=10'
     resolution:
-      integrity: sha512-J7thop4u3mRTkYRQ+Vpfwy2G5Ehoy82I14+14W4YMDLKdWloI9gSzRbV30s/NckQGVJtPkWNcW4oMAUigTdqiQ==
+      integrity: sha512-bYL2d05vOSf1JEZNx5vSAtPuBMkX8K9EUutg7zlKvTqKXHt7RhWJFbmd7qakVuf13i+IkGmp6FwSsONOf6VYIg==
   /define-properties/1.1.3:
     dependencies:
       object-keys: 1.1.1
@@ -885,10 +887,6 @@ packages:
     dev: true
     resolution:
       integrity: sha1-ixLauHjA1p4+eJEFFmKjL8a93ME=
-  /duplexer3/0.1.4:
-    dev: true
-    resolution:
-      integrity: sha1-7gHdHKwO08vH/b6jfcCo8c4ALOI=
   /duplexify/3.7.1:
     dependencies:
       end-of-stream: 1.4.4
@@ -1138,27 +1136,25 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-S0nG3CLEQiY/ILxqtztTWH/3iRRdyBLw6KMDxnKMchrtbj2OFmehVh0WUCfW3DUrIgx/qFrJPICrq4Z4sTR9UQ==
-  /got/10.0.4:
+  /got/11.0.2:
     dependencies:
-      '@sindresorhus/is': 1.2.0
-      '@szmarczak/http-timer': 3.1.1
+      '@sindresorhus/is': 2.1.1
+      '@szmarczak/http-timer': 4.0.5
       '@types/cacheable-request': 6.0.1
-      cacheable-lookup: 0.2.1
-      cacheable-request: 7.0.0
+      '@types/responselike': 1.0.0
+      cacheable-lookup: 4.2.1
+      cacheable-request: 7.0.1
       decompress-response: 5.0.0
-      duplexer3: 0.1.4
       get-stream: 5.1.0
+      http2-wrapper: 1.0.0-beta.4.4
       lowercase-keys: 2.0.0
-      mimic-response: 2.0.0
       p-cancelable: 2.0.0
       responselike: 2.0.0
-      to-readable-stream: 2.1.0
-      type-fest: 0.8.1
     dev: true
     engines:
-      node: '>=10'
+      node: '>=10.19.0'
     resolution:
-      integrity: sha512-yMaRLGZJ7iINsDcZ8hso+v44IXVOejz7xrqEabSvUewdHS3zOf57IqU3sWIBYwHlekSrk+CC2PCeLzabOBxnVA==
+      integrity: sha512-zOanxiJs1LaBAiKsV43UUw/oRlyRNtJFeuATahfi4c3MTremj09eAeJBSJ7GR2oEMhrLLRSJpz8fQaojVDijjw==
   /got/5.7.1:
     dependencies:
       create-error-class: 3.0.2
@@ -1246,10 +1242,19 @@ packages:
     dev: true
     resolution:
       integrity: sha512-kssjab8CvdXfcXMXVcvsXum4Hwdq9XGtRD3TteMEvEbq0LXyiNQr6AprqKqfeaDXze7SxWvRxdpwE6ku7ikLkg==
-  /http-cache-semantics/4.0.3:
+  /http-cache-semantics/4.1.0:
     dev: true
     resolution:
-      integrity: sha512-TcIMG3qeVLgDr1TEd2XvHaTnMPwYQUQMIBLy+5pLSDKYFc7UIqj39w8EGzZkaxoLv/l2K8HaI0t5AVA+YYgUew==
+      integrity: sha512-carPklcUh7ROWRK7Cv27RPtdhYhUsela/ue5/jKzjegVvXDqM2ILE9Q2BGn9JZJh1g87cp56su/FgQSzcWS8cQ==
+  /http2-wrapper/1.0.0-beta.4.4:
+    dependencies:
+      quick-lru: 5.1.0
+      resolve-alpn: 1.0.0
+    dev: true
+    engines:
+      node: '>=10.19.0'
+    resolution:
+      integrity: sha512-CHpjljc2VeZQ1Lk02dwAfOq0k7uY+MSmt9or0zQiyPr++BIngUKIDRoy/MfX0jVZbpG/GjGVZK3K9ac5pBS//A==
   /ieee754/1.1.13:
     resolution:
       integrity: sha512-4vf7I2LYV/HaWerSo3XmlMkp5eZ83i+/CDluXi/IGTs/O1sejBNhTtnxzmRZfvOUqj7lZjqHkeTvpgSFDlWZTg==
@@ -1570,10 +1575,10 @@ packages:
     hasBin: true
     resolution:
       integrity: sha1-RsP+yMGJKxKwgz25vHYiF226s0s=
-  /json-buffer/3.0.0:
+  /json-buffer/3.0.1:
     dev: true
     resolution:
-      integrity: sha1-Wx85evx11ne96Lz8Dkfh+aPZqJg=
+      integrity: sha512-4bV5BfR2mqfQTJm+V5tPPdf+ZpuhiIvTuAB5g8kcrXOZpTT/QwwVRWBywX1ozr6lEuPdbHxwaJlm9G6mI2sfSQ==
   /json-parse-better-errors/1.0.2:
     dev: true
     resolution:
@@ -1597,12 +1602,12 @@ packages:
       graceful-fs: 4.2.3
     resolution:
       integrity: sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss=
-  /keyv/3.1.0:
+  /keyv/4.0.0:
     dependencies:
-      json-buffer: 3.0.0
+      json-buffer: 3.0.1
     dev: true
     resolution:
-      integrity: sha512-9ykJ/46SN/9KPM/sichzQ7OvXyGDYKGTaDlKMGCAlg2UK8KRy4jb0d8sFc+0Tt0YYnThq8X2RZgCg74RPxgcVA==
+      integrity: sha512-U7ioE8AimvRVLfw4LffyOIRhL2xVgmE8T22L6i0BucSnBUyv4w+I7VN/zVZwRKHOI6ZRUcdMdWHQ8KSUvGpEog==
   /latest-version/2.0.0:
     dependencies:
       package-json: 2.4.0
@@ -1790,12 +1795,12 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-j5EctnkH7amfV/q5Hgmoal1g2QHFJRraOtmx0JpIqkxhBhI/lJSl1nMpQ45hVarwNETOoWEimndZ4QK0RHxuxQ==
-  /mimic-response/2.0.0:
+  /mimic-response/2.1.0:
     dev: true
     engines:
       node: '>=8'
     resolution:
-      integrity: sha512-8ilDoEapqA4uQ3TwS0jakGONKXVJqpy+RpM+3b7pLdOjghCrEiGp9SRkFbUHAmZW9vdnrENWHjaweIoTIJExSQ==
+      integrity: sha512-wXqjST+SLt7R009ySCglWBCFpjUygmCIfD790/kVbiGmUgfYGuB14PiTd5DwVxSV4NcYHjzMkoj5LjQZwTQLEA==
   /minimatch/3.0.4:
     dependencies:
       brace-expansion: 1.1.11
@@ -2468,6 +2473,12 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-Q2CxfGETatOAeDl/8RQW4Ybc+7g=
+  /quick-lru/5.1.0:
+    dev: true
+    engines:
+      node: '>=10'
+    resolution:
+      integrity: sha512-WjAKQ9ORzvqjLijJXiXWqc3Gcs1ivoxCj6KJmEjoWBE6OtHwuaDLSAUqGHALUiid7A1KqGqsSHZs8prxF5xxAQ==
   /rc/1.2.8:
     dependencies:
       deep-extend: 0.6.0
@@ -2658,6 +2669,10 @@ packages:
     dev: true
     resolution:
       integrity: sha1-AKCUD5jNUBrqqsMWQR2a3FKzGrE=
+  /resolve-alpn/1.0.0:
+    dev: true
+    resolution:
+      integrity: sha512-rTuiIEqFmGxne4IovivKSDzld2lWW9QCjqv80SYjPgf+gS35eaCAjaP54CCwGAwBtnCsvNLYtqxe1Nw+i6JEmA==
   /resolve-cwd/1.0.0:
     dependencies:
       resolve-from: 2.0.0
@@ -3227,12 +3242,6 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-uDVx+k2MJbguIxsG46MFXeTKGkc=
-  /to-readable-stream/2.1.0:
-    dev: true
-    engines:
-      node: '>=8'
-    resolution:
-      integrity: sha512-o3Qa6DGg1CEXshSdvWNX2sN4QHqg03SPq7U6jPXRahlQdl5dK8oXjkU/2/sGrnOZKeGV1zLSO8qPwyKklPPE7w==
   /trim-newlines/1.0.0:
     dev: true
     engines:
@@ -3281,12 +3290,6 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-q+MB8nYR1KDLrgr4G5yemftpMC7/QLqVndBmEEdqzmNj5dcFOO4Oo8qlwZE3ULT3+Zim1F8Kq4cBnikNhlCMlg==
-  /type-fest/0.8.1:
-    dev: true
-    engines:
-      node: '>=8'
-    resolution:
-      integrity: sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
   /typedarray-to-buffer/3.1.5:
     dependencies:
       is-typedarray: 1.0.0
@@ -3538,7 +3541,7 @@ specifiers:
   '@types/tape': ^4.2.33
   '@types/tar-fs': ^2.0.0
   decompress-maybe: ^1.0.0
-  got: ^10.0.0
+  got: ^11.0.0
   ignorable: ^1.0.1
   mos: ^2.0.0-alpha.3
   mos-plugin-readme: ^1.0.4
