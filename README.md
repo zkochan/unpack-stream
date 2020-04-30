@@ -1,4 +1,4 @@
-This package was used by pre-v5 versions of pnpm. It is not used since pnpm switched to using a content-addressable filesystem for the packages storage.
+**This package was used by pre-v5 versions of pnpm. It is not used since pnpm switched to using a content-addressable filesystem for the packages storage.**
 
 # unpack-stream
 
