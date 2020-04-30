@@ -1,6 +1,4 @@
-this package was used by pre-v5 versions of pnpm
-
-now it is not used anymore
+This package was used by pre-v5 versions of pnpm. It is not used since pnpm switched to using a content-addressable filesystem for the packages storage.
 
 # unpack-stream
 
