@@ -1,3 +1,7 @@
+this package was used by pre-v5 versions of pnpm
+
+now it is not used anymore
+
 # unpack-stream
 
 > Unpack a tarball stream
